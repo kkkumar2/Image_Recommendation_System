@@ -99,11 +99,6 @@ class RUN:
         return img_names
 
 
-
-    
-
-
-
 if __name__ == '__main__':
     j = RUN('config/config.yaml','params.yaml')
     
