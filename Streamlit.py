@@ -49,9 +49,9 @@ def image_parser(out1,out2):
     st.header("Rating based recommendation")
     image_displayer(img_name,URL,Price,rating,Buy_count,BrandName) 
 
-    # img_name,URL,Price,rating,Buy_count,BrandName = out3['count_based'] 
-    # st.header("Most People bought this")
-    # image_displayer(img_name,URL,Price,rating,Buy_count,BrandName) 
+    img_name,URL,Price,rating,Buy_count,BrandName = out3['count_based'] 
+    st.header("Most People bought this")
+    image_displayer(img_name,URL,Price,rating,Buy_count,BrandName) 
 
 ## Gif from local file
 def image_converter(filename):
@@ -99,8 +99,8 @@ elif app_mode == "Run on Image on prediction":
                     st.sidebar.text("orginal image")
                     st.sidebar.image(image)
                     
-                    out1,out2 = obj1.search(Framework=app_mode2,Technique=app_mode3,image=image)
-                    image_parser(out1,out2)
+                    out1,out2,out3 = obj1.search(Framework=app_mode2,Technique=app_mode3,image=image)
+                    image_parser(out1,out2,out3)
 
                     st.snow()
                     st.balloons()

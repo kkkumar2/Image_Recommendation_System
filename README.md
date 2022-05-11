@@ -42,9 +42,6 @@ streamlit run Streamlit.py
 ### Working
 we have working with api with OAuth2 and JWT tokens
 
-## Special Thanks
-#### Rishave Dash @ineuron
-
 ## Dataset
 
 <a href="https://drive.google.com/drive/folders/1iReMDMw_WSyuLTXXWQv7H0jMv2e4Wsqd?usp=sharing">Click here</a> to get the dataset of resized 5000 images from myntra

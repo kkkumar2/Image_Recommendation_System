@@ -1,4 +1,4 @@
-from DeepImageSearch.utils.allutils import LoadImagesNormal,util,Annoy
+from DeepImageSearch.utils.allutils import LoadImagesNormal,util
 from torchvision import models
 import os
 from tqdm import tqdm
@@ -71,7 +71,7 @@ class NoramlfeatureextractorPytroch:
         f = features[0].shape[0]
         t = AnnoyIndex(f, 'angular')
         for i in range(len(features)):
-            v = self.features[i]
+            v = features[i]
             t.add_item(i, v)
         
         t.build(30) 
@@ -132,7 +132,7 @@ class NoramlfeatureextractorTensorflow:
         f = features[0].shape[0]
         t = AnnoyIndex(f, 'angular')
         for i in range(len(features)):
-            v = self.features[i]
+            v = features[i]
             t.add_item(i, v)
         
         t.build(30) 
