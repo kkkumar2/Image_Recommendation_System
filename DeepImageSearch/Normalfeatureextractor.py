@@ -194,7 +194,7 @@ class SearchImageNormalPytoch:
         indices = self.u.get_nns_by_vector(featurevector, 5, search_k=30)
         
         files = []
-        for ind in indices[0]:
+        for ind in indices:
             file = self.imagesten[ind]
             files.append(file)
         return files
@@ -225,7 +225,7 @@ class SearchImageNormaltensorflow:
         indices = self.u.get_nns_by_vector(featurevector, 5, search_k=30)
         
         files = []
-        for ind in indices[0]:
+        for ind in indices:
             file = self.imagesten[ind]
             files.append(file)
         return files
@@ -237,8 +237,8 @@ def normalmain():
     parser.add_argument('--params', "-p", type=str, default="params.yaml", help='ROOT/params.yaml')
     opt = parser.parse_args()
 
-    # FEpt = NoramlfeatureextractorPytroch(**vars(opt))
-    # FEpt.get_features_normal()
+    FEpt = NoramlfeatureextractorPytroch(**vars(opt))
+    FEpt.get_features_normal()
     FEten = NoramlfeatureextractorTensorflow(next(iter(vars(opt).values())))
     FEten.get_features_normal()
 

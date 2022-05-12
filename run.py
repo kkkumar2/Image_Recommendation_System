@@ -12,6 +12,8 @@ class RUN:
         # self.tfcbbr = SearchImageTensorflow(config)
         # self.pynormal = SearchImageNormalPytoch(config,params)
         self.tfnormal = SearchImageNormaltensorflow(config)
+        self.config = config
+        self.params = params
         config = util.read_yaml(config)
         artifact_dir = config["artifacts"]["artifactdir"]
         metadata_dir = config["artifacts"]["meta_data_dir"]
@@ -33,16 +35,16 @@ class RUN:
 
         if Framework == "Pytroch":
             if Technique == "ccbr": 
-                imagespath = self.pyccbr.get_similar_images(image)
+                imagespath = SearchImagePytorch(self.config,self.params).get_similar_images(image)
             else:
-                imagespath = self.pynormal.get_similar_images_normal(image)
+                imagespath = SearchImageNormalPytoch(self.config,self.params).get_similar_images_normal_Annoy(image)
 
         else:
             if Technique == 'ccbr':
-                imagespath = self.tfccbr.get_similar_images(image)
+                imagespath = SearchImageTensorflow(self.config).get_similar_images(image)
             else:
-                imagespath = self.tfnormal.get_similar_images_normal(image)
-
+                imagespath = SearchImageNormaltensorflow(self.config).get_similar_images_normal_Annoy(image)
+                            
         out1 = self.image_based(imagespath,'image_based')
         out2 = self.image_based(imagespath,'rating_based')
         out3 = self.image_based(imagespath,'count_based')
@@ -57,12 +59,8 @@ class RUN:
             for img_name in imagespath:
                 base_imgname.append(img_name.split('\\')[-1])      
     # https://stackoverflow.com/questions/56658723/how-to-maintain-order-when-selecting-rows-in-pandas-dataframe  
-
-            # ele = self.df[self.df['Imagename'].isin(base_imgname)] 
             ele = self.df.set_index('Imagename').reindex(base_imgname).reset_index()
-            # ele = ele.sort_values(by='Imagename')
             img_names = imagespath
-            # img_names.sort()
 
         elif type == 'rating_based':
             base_name = imagespath[0].split('\\')[-1]

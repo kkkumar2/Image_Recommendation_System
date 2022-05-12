@@ -11,36 +11,34 @@
 
 ### Sandeep Jena
 
+# About the Project:
+    This project can be applied to recommend images based on the image you upload. This project can be easily integrated for other usecases as well.
 
+# Library and tools used:
+    1) Streamlit
+    2) tensorflow
+    3) Pytorch
+    4) Selenium
+    5) Annoy
+    6) KNN
+
+How to use this Project in your local:
+
+Clone the Repository using
 ```bash
-conda env create -f conda.yml
+git clone https://github.com/kkkumar2/Image_Recommendation_System.git
 ```
-
-
-
+Create a environment and install all the requirements from requirements.txt
 ```bash
-source activate recomendation
+conda create -n [env_name] option
+pip install -r requirements.txt
 ```
-
-
-
-
-```bash
-conda env create -f conda.yml
-```
-
-
+Run the following command to run the web application locally
 ```bash
 streamlit run Streamlit.py
 ```
-
-
-### information
-**This project complete 7 day may be there is bug if you find then raise a issue.**
-**We have not show much experiment with our custome model so our not so much good with Accuracy**
-
-### Working
-we have working with api with OAuth2 and JWT tokens
+A demo is  shown below:
+![GIF](recommendation.gif)
 
 ## Dataset
 

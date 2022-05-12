@@ -4,10 +4,19 @@ import numpy as np
 from PIL import Image
 import os
 import base64
-from DeepImageSearch.utils.allutils import save_uploaded_file
 from run import RUN
 
 obj1 = RUN('config/config.yaml','params.yaml')
+
+def save_uploaded_file(uploaded_file):
+    try:
+        os.makedirs('uploads',exist_ok=True)
+        with open(os.path.join('uploads',uploaded_file.name),'wb') as f:
+            f.write(uploaded_file.getbuffer())
+        return 1
+    except Exception as e:
+        print(F"Error is {e}")
+        return 0
 
 @st.cache(allow_output_mutation=True)
 def get_base64_of_bin_file(bin_file):

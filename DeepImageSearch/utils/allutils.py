@@ -150,12 +150,3 @@ class LoadImagesCCBR:
     def __len__(self):
         return self.nf
 
-def save_uploaded_file(uploaded_file):
-    try:
-        os.makedirs('uploads',exist_ok=True)
-        with open(os.path.join('uploads',uploaded_file.name),'wb') as f:
-            f.write(uploaded_file.getbuffer())
-        return 1
-    except Exception as e:
-        print(F"Error is {e}")
-        return 0
