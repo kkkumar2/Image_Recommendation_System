@@ -40,7 +40,7 @@ def image_displayer(img_name,URL,Price,rating,Buy_count,BrandName):
             st.write(f"Rating :{rating[i]}")
             st.write(Price[i])
 
-def image_parser(out1,out2):
+def image_parser(out1,out2,out3):
     img_name,URL,Price,rating,Buy_count,BrandName = out1['image_based']         
     st.header("Image based recommendation")
     image_displayer(img_name,URL,Price,rating,Buy_count,BrandName) 
@@ -99,7 +99,7 @@ elif app_mode == "Run on Image on prediction":
                     st.sidebar.text("orginal image")
                     st.sidebar.image(image)
                     
-                    out1,out2,out3 = obj1.search(Framework=app_mode2,Technique=app_mode3,image=image)
+                    out1,out2,out3 = obj1.search(Framework=app_mode2,Technique=app_mode3,image=os.path.join('uploads',uploaded_file.name))
                     image_parser(out1,out2,out3)
 
                     st.snow()

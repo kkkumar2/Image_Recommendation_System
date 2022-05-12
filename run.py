@@ -8,24 +8,24 @@ from os.path import exists
 
 class RUN:
     def __init__(self,config,params):
-        self.pyccbr = SearchImagePytorch(config,params)
-        self.tfcbbr = SearchImageTensorflow(config)
-        self.pynormal = SearchImageNormalPytoch(config,params)
+        # self.pyccbr = SearchImagePytorch(config,params)
+        # self.tfcbbr = SearchImageTensorflow(config)
+        # self.pynormal = SearchImageNormalPytoch(config,params)
         self.tfnormal = SearchImageNormaltensorflow(config)
         config = util.read_yaml(config)
         artifact_dir = config["artifacts"]["artifactdir"]
         metadata_dir = config["artifacts"]["meta_data_dir"]
         analysisdataframe = config['artifacts']['analysisdataframe']
         data_path = os.path.join(artifact_dir,metadata_dir,analysisdataframe)
-        dict_ = util.load_pickle(data_path)
+        dict_ = util.read_pickle(data_path)
         self.df = pd.DataFrame(dict_)
         image_dir = config["artifacts"]["image_dir"]
         preprocessed = config["artifacts"]["preprocessed"]
         raw = config["artifacts"]["raw"]
-        train = config["artifacts"]["train"]
-        val = config["artifacts"]["val"]
-        self.basepath1 = os.path.join(artifact_dir,image_dir,preprocessed,raw,train)
-        self.basepath2 = os.path.join(artifact_dir,image_dir,preprocessed,raw,val)
+        train = config["artifacts"]["train_dir"]
+        val = config["artifacts"]["val_dir"]
+        self.basepath1 = os.path.join(artifact_dir,image_dir,raw,train)
+        self.basepath2 = os.path.join(artifact_dir,image_dir,raw,val)
 
 
 
@@ -55,26 +55,33 @@ class RUN:
         baselink = 'https://www.myntra.com/'
         if type == 'image_based':
             for img_name in imagespath:
-                base_imgname.append(img_name.split('\\')[-1])        
-            ele = self.df[self.df['Imagename'].isin(base_imgname)]
+                base_imgname.append(img_name.split('\\')[-1])      
+    # https://stackoverflow.com/questions/56658723/how-to-maintain-order-when-selecting-rows-in-pandas-dataframe  
+
+            # ele = self.df[self.df['Imagename'].isin(base_imgname)] 
+            ele = self.df.set_index('Imagename').reindex(base_imgname).reset_index()
+            # ele = ele.sort_values(by='Imagename')
             img_names = imagespath
+            # img_names.sort()
 
         elif type == 'rating_based':
             base_name = imagespath[0].split('\\')[-1]
-            Category_name = self.df[self.df['Imagename'] == base_name]['category']
+            Category_name = self.df[self.df['Imagename'] == base_name]['Category'].values
             sorted_df = self.df.sort_values("Price", ascending=True)
             sorted_df = sorted_df.sort_values("Ratting", ascending=False)
-            sorted_df = sorted_df.groupby('Category').get_group(Category_name).head(5)
+            sorted_df = sorted_df.groupby('Category').get_group(Category_name[0]).head(5)
             img_names = sorted_df['Imagename'].to_list()
-            img_names = self.full_imagepath_fetch(Category_name,img_names)
+            img_names = self.full_imagepath_fetch(Category_name[0],img_names)
+            ele = sorted_df
 
         elif type == 'count_based':
             base_name = imagespath[0].split('\\')[-1]
-            Category_name = self.df[self.df['Imagename'] == base_name]['category']
+            Category_name = self.df[self.df['Imagename'] == base_name]['Category'].values
             sorted_df = self.df.sort_values("NoOfPurchasing", ascending=False)
-            sorted_df = sorted_df.groupby('Category').get_group(Category_name).head(5)
+            sorted_df = sorted_df.groupby('Category').get_group(Category_name[0]).head(5)
             img_names = sorted_df['Imagename'].to_list()
-            img_names = self.full_imagepath_fetch(Category_name,img_names)
+            img_names = self.full_imagepath_fetch(Category_name[0],img_names)
+            ele = sorted_df
 
         b_URL = ele['WebsiteProductLink'].to_list()
         URL = [baselink+i for i in b_URL]
@@ -88,8 +95,8 @@ class RUN:
     def full_imagepath_fetch(self,Category_name,img_base):
         img_names = []
         for ele in img_base:
-            image_path = os.path.join(self.basepath1,Category_name,ele)
-            image_path2 = os.path.join(self.basepath2,Category_name,ele)
+            image_path = os.path.join(os.getcwd(),self.basepath1,Category_name,ele)
+            image_path2 = os.path.join(os.getcwd(),self.basepath2,Category_name,ele)
             if exists(image_path):
                 img_names.append(image_path)
             elif exists(image_path2):

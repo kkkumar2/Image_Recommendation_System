@@ -177,6 +177,7 @@ class SearchImageNormalPytoch:
         self.u.load(self.FE.annoy_path)
 
     def get_similar_images_normal(self,img):
+        print(img)
         featurevector = self.FE.extract(img)
         neighbors = NearestNeighbors(n_neighbors=5, algorithm='brute', metric='euclidean')
         neighbors.fit(self.vectors)
@@ -236,8 +237,8 @@ def normalmain():
     parser.add_argument('--params', "-p", type=str, default="params.yaml", help='ROOT/params.yaml')
     opt = parser.parse_args()
 
-    FEpt = NoramlfeatureextractorPytroch(**vars(opt))
-    FEpt.get_features_normal()
+    # FEpt = NoramlfeatureextractorPytroch(**vars(opt))
+    # FEpt.get_features_normal()
     FEten = NoramlfeatureextractorTensorflow(next(iter(vars(opt).values())))
     FEten.get_features_normal()
 

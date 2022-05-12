@@ -6,7 +6,7 @@ artifacts:
   train_dir: train
   val_dir: val
   meta_data_dir: meta_data
-  analysisdataframe: Data
+  analysisdataframe: Data.pkl
   dataframepkl: DataFrame.pkl
   pytorchhistory: historypth.pkl
   pytorchmodel: pytmodel.pth
