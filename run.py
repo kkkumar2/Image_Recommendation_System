@@ -8,10 +8,6 @@ from os.path import exists
 
 class RUN:
     def __init__(self,config,params):
-        # self.pyccbr = SearchImagePytorch(config,params)
-        # self.tfcbbr = SearchImageTensorflow(config)
-        # self.pynormal = SearchImageNormalPytoch(config,params)
-        self.tfnormal = SearchImageNormaltensorflow(config)
         self.config = config
         self.params = params
         config = util.read_yaml(config)
@@ -54,7 +50,7 @@ class RUN:
     def image_based(self,imagespath,type):
 
         base_imgname = []; URL = []
-        baselink = 'https://www.myntra.com/'
+        baselink = 'https://www.myntra.com/' 
         if type == 'image_based':
             for img_name in imagespath:
                 base_imgname.append(img_name.split('\\')[-1])      
@@ -63,7 +59,7 @@ class RUN:
             img_names = imagespath
 
         elif type == 'rating_based':
-            base_name = imagespath[0].split('\\')[-1]
+            base_name = imagespath[0].split('\\')[-1] 
             Category_name = self.df[self.df['Imagename'] == base_name]['Category'].values
             sorted_df = self.df.sort_values("Price", ascending=True)
             sorted_df = sorted_df.sort_values("Ratting", ascending=False)

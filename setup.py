@@ -5,6 +5,6 @@ setup(
     version="0.0.1",
     author="sandeep and mk",
     packages=["DeepImageSearch"],
-    python_requires=">=3.7",
+    python_requires=">=3.6",
 
 )

@@ -239,8 +239,8 @@ def normalmain():
 
     FEpt = NoramlfeatureextractorPytroch(**vars(opt))
     FEpt.get_features_normal()
-    FEten = NoramlfeatureextractorTensorflow(next(iter(vars(opt).values())))
-    FEten.get_features_normal()
+#    FEten = NoramlfeatureextractorTensorflow(next(iter(vars(opt).values())))
+#    FEten.get_features_normal()
 
 if __name__ == '__main__':
     normalmain()
