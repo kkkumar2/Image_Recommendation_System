@@ -78,7 +78,7 @@ streamlit run Streamlit.py
 ```
 A demo is  shown below:
 
-![GIF](readme_resources\\recommendation.gif)
+![GIF](recommendation.gif)
 
 ## Dataset
 
