@@ -18,6 +18,9 @@ This project can be applied to recommend images based on the image you upload. T
     1) CCBR - This technique is a custom trained model which classifies the incoming image and extracts the features    parallely and recommends top 5 images by using KNN. This technique is handled in both Tensorflow and Pytorch frameworks
 
     2) Normal feature Extraction using pretrained model - This technique uses VGG16 in Tensorflow and RESNET50 model in Pytorch framework. This Method will not classify image into category and use that category for selecting top 5 images instead we search the Entire images in all category using ANNOY Library(C++ Library with python bindings)
+    
+    
+#### If you don't want download (C++ Libary) used sklearn libary  insted of ANNOY library There is another [repro](https://github.com/sandeepjena7/Image-Based-Recommendation-System)
         
 ## **KNN - K nearest Neighbours:**
 **input** - features vectors for the class which the model predicted while fitting and uploaded image's feature vector while predicting
