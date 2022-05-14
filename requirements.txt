@@ -14,8 +14,8 @@ opencv-python
 dvc
 -e .
 fastapi
-"uvicorn[standard]"
+uvicorn[standard]
 python-multipart
-"python-jose[cryptography]"
-"passlib[bcrypt]"
+python-jose[cryptography]
+passlib[bcrypt]
 streamlit
