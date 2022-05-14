@@ -63,8 +63,18 @@ git clone https://github.com/kkkumar2/Image_Recommendation_System.git
 ```
 Create a environment and install all the requirements from requirements.txt
 ```bash
+conda env create -f environment.yml
+```
+**OR**
+
+```bash
 bash initial_setup.sh
 ```
+Activate enviroment
+```bash
+source activate recomendation
+```
+
 Run the following command to run the web application locally
 ```bash
 streamlit run Streamlit.py
