@@ -36,23 +36,23 @@ distances, indices = neighbors.kneighbors([featurevector])
 
 **output** - top 5 images Index 
 
-        Build Index:
-        ```bash
-        f = features[0].shape[0]
-        t = AnnoyIndex(f, 'angular')
-        for i in range(len(features)):
-            v = features[i]
-            t.add_item(i, v)
-        
-        t.build(30) 
-        t.save(self.annoy_path)
-        ```
-        Predict:
-        ```bash
-        featurevector = self.FE.extract(img)
-        indices = self.u.get_nns_by_vector(featurevector, 5, search_k=30)
-        
-        ```
+Build Index:
+```Python
+f = features[0].shape[0]
+t = AnnoyIndex(f, 'angular')
+for i in range(len(features)):
+    v = features[i]
+    t.add_item(i, v)
+
+t.build(30) 
+t.save(self.annoy_path)
+```
+Predict:
+```Python
+featurevector = self.FE.extract(img)
+indices = self.u.get_nns_by_vector(featurevector, 5, search_k=30)
+
+```
 
 
 How to use this Project in your local:
