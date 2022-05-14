@@ -24,12 +24,12 @@ This project can be applied to recommend images based on the image you upload. T
 
 **output** - top 5 images Index and distance
 
-        ```bash
-        featurevector = self.FE.extract(img)
-        neighbors = NearestNeighbors(n_neighbors=5, algorithm='brute', metric='euclidean')
-        neighbors.fit(self.vectors)
-        distances, indices = neighbors.kneighbors([featurevector])
-        ```
+```python
+featurevector = self.FE.extract(img)
+neighbors = NearestNeighbors(n_neighbors=5, algorithm='brute', metric='euclidean')
+neighbors.fit(self.vectors)
+distances, indices = neighbors.kneighbors([featurevector])
+```
     
 ## **ANNOY - Approximate nearest Neighbours oh yeah:**
 **input** - Create a index with the help of all images and use that index while predicting
@@ -54,13 +54,6 @@ This project can be applied to recommend images based on the image you upload. T
         
         ```
 
-# Library and tools used:
-    1) Streamlit
-    2) tensorflow
-    3) Pytorch
-    4) Selenium
-    5) Annoy
-    6) KNN
 
 How to use this Project in your local:
 
